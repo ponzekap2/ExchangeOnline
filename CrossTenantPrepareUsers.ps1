@@ -2,8 +2,9 @@
 
 
 
-$SourceOrg = "echots.onmicrosoft.com"
-$DestinationOrg = "abacusgroupllcclient.onmicrosoft.com"
+$SourceOrg = "sourceorg.onmicrosoft.com"
+$DestinationOrg = "destorg.onmicrosoft.com"
+$SecureString = "[ENTERSTRING]"
 
 Connect-ExchangeOnline -DelegatedOrganization $SourceOrg -Prefix SRC
 Connect-ExchangeOnline -DelegatedOrganization $DestinationOrg -Prefix DST
@@ -49,7 +50,7 @@ $TargetUser.PrimarySMTPAddress = $TargetUser.ExtraSMTPAliases2 -Replace "smtp:",
 
 $ExistingMailUser = Get-DSTMailUser -Identity $TargetUser.UserPrincipalName -ErrorAction SilentlyContinue
 
-if (!$ExistingMailUser) {New-DSTMailUser -Name $TargetUser.DisplayName  -ExternalEmailAddress $TargetUser.ExternalEmailAddress -MicrosoftOnlineServicesID $TargetUser.UserPrincipalName -Password (ConvertTo-SecureString -String 'Y!3sMegxh@dCi%t3d6J' -AsPlainText -Force) -FirstName $TargetUser.FirstName -lastname $Targetuser.LastName -Alias $TargetUser.Alias}
+if (!$ExistingMailUser) {New-DSTMailUser -Name $TargetUser.DisplayName  -ExternalEmailAddress $TargetUser.ExternalEmailAddress -MicrosoftOnlineServicesID $TargetUser.UserPrincipalName -Password (ConvertTo-SecureString -String $SecureString -AsPlainText -Force) -FirstName $TargetUser.FirstName -lastname $Targetuser.LastName -Alias $TargetUser.Alias}
 
 ###Configure Extra Properties
 

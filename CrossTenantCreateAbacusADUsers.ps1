@@ -1,6 +1,7 @@
 
 $SourceOrg = "echots.onmicrosoft.com"
 $DestinationOrg = "abacusgroupllcclient.onmicrosoft.com"
+$SecureString = "ENTERSTRING"
 
 Connect-ExchangeOnline -Organization $SourceOrg -Prefix SRC
 Connect-ExchangeOnline -Organization $DestinationOrg -Prefix DST
@@ -32,7 +33,7 @@ $TargetUser.PrimarySMTPAddress = $SourceUser.PrimarySMTPAddress -replace "@echot
 
 
 
-New-AdUser -DisplayName $TargetUser.DisplayName -GivenName $TargetUser.FirstName -Surname $TargetUser.LastName -name $TargetUser.DisplayName -Office $TargetUser.Office -State $TargetUser.StateorProvince -EmailAddress $TargetUser.PrimarySMTPAddress -UserprincipalName $TargetUser.PrimarySMTPAddress -samaccountname $TargetUser.Alias -Title $TargetUser.Title -city $TargetUser.City -AccountPassword (ConvertTo-SecureString -String 'Y!3sMegxh@dCi%t3d6J' -AsPlainText -Force) -Path $ou -Department $TargetUser.Department -Company "Echo IT" -Enabled:$true
+New-AdUser -DisplayName $TargetUser.DisplayName -GivenName $TargetUser.FirstName -Surname $TargetUser.LastName -name $TargetUser.DisplayName -Office $TargetUser.Office -State $TargetUser.StateorProvince -EmailAddress $TargetUser.PrimarySMTPAddress -UserprincipalName $TargetUser.PrimarySMTPAddress -samaccountname $TargetUser.Alias -Title $TargetUser.Title -city $TargetUser.City -AccountPassword (ConvertTo-SecureString -String $SecureString -AsPlainText -Force) -Path $ou -Department $TargetUser.Department -Company "Echo IT" -Enabled:$true
 
 
 

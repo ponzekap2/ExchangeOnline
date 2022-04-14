@@ -1,8 +1,8 @@
 ###Migration Endpoint
 
-$AppId = "4eb407dd-7abc-4265-9060-98937361ae61"
+$AppId = "APPID"
 
-$Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $AppId, (ConvertTo-SecureString -String "PPv7Q~IsQaG9xCA.Nq4CwdkdAEBF1C5Wyze~b" -AsPlainText -Force)
+$Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $AppId, (ConvertTo-SecureString -String "SECURESTRING" -AsPlainText -Force)
 
 New-MigrationEndpoint -RemoteServer outlook.office.com -RemoteTenant "echots.onmicrosoft.com" -Credentials $Credential -ExchangeRemoteMove:$true -Name "AbacusEchoMigration" -ApplicationId $AppId
 
@@ -26,8 +26,8 @@ If ($null -eq $existingOrgRel)
 
 #### Source Tenant
 
-$targetTenantId="9b03cdab-f4c4-4042-8ffa-62a58ac0a998"
-$appId="4eb407dd-7abc-4265-9060-98937361ae61"
+$targetTenantId="TENANTID"
+$appId="APPID"
 $scope="AbacusMailMigrationMailboxes"
 $orgrels=Get-OrganizationRelationship
 $existingOrgRel = $orgrels | ?{$_.DomainNames -like $targetTenantId}
@@ -52,7 +52,7 @@ Connect-ExchangeOnline -Organization $DestinationOrg -Prefix DST
 
 $SourceUser = "techo@echots.com"
 $TargetUser = "techo@abacusgroupllcclient.onmicrosoft.com"
-#$TargetUserImmutableID = "Z3O6AvfRTEOO3FuBuTHYLQ=="
+
 $SourceMailbox = Get-SRCMailbox -Identity $SourceUser
 
 
@@ -70,6 +70,3 @@ $SourceMailbox.PrimarySMTPAddress
 $TargetMailUser = Get-DSTMailUser -Identity $TargetUser
 
 $TargetMailUser | Set-DSTMailUser -ExchangeGuid $SourceMailbox.ExchangeGuid -ArchiveGuid $SourceMailbox.ArchiveGUID
-
-
-/o=ExchangeLabs/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=8119d16c6d6e42dea2d85a59dd6ab446-Timothy Ech
